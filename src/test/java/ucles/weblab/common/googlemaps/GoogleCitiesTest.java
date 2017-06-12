@@ -33,19 +33,19 @@ public class GoogleCitiesTest {
     }
 
     @Test
-    public void testFindCitiesByLatLong() throws GoogleConnectionException {
+    public void testFindCityOrCountryByLatLong() throws GoogleConnectionException {
 
         LatLng oneHillsRoad = new LatLng(52.19913570000001, 0.12795240000000002);
-        GeocodingResult cambridgeCityInSpanish = googleCities.findCityByLatLong(oneHillsRoad, SPANISH);
+        GeocodingResult cambridgeCityInSpanish = googleCities.findCityOrCountryByLatLong(oneHillsRoad, SPANISH);
         assertEquals("Cambridge, Reino Unido", cambridgeCityInSpanish.formattedAddress);
 
         LatLng northSea = new LatLng(56.458425, 3.555048);
-        GeocodingResult noCitiesInTheNorthSea = googleCities.findCityByLatLong(northSea, SPANISH);
+        GeocodingResult noCitiesInTheNorthSea = googleCities.findCityOrCountryByLatLong(northSea, SPANISH);
         assertNull(noCitiesInTheNorthSea);
 
         LatLng antarctica = new LatLng(-83.766245, -46.484898);
-        GeocodingResult regionNotACity = googleCities.findCityByLatLong(antarctica, SPANISH);
-        assertNull(regionNotACity);
+        GeocodingResult countryNotACity = googleCities.findCityOrCountryByLatLong(antarctica, SPANISH);
+        assertEquals("Antártida", countryNotACity.formattedAddress);
 
     }
 }

@@ -51,33 +51,49 @@ public class GoogleCities {
 
     /**
      * Finds the first result that is a city (defined by google as a locatality or administrative area level 3) for
-     * the given coordinates, or null if no city is found.
+     * the given coordinates, or the country if no city is found, or null if no country is found.
      *
      * @param languageCode  The language of the returned results - e.g 'es' will return results in Spanish
      */
-    public GeocodingResult findCityByLatLong(LatLng latLong, String languageCode) throws GoogleConnectionException {
+    public GeocodingResult findCityOrCountryByLatLong(LatLng latLong, String languageCode) throws GoogleConnectionException {
         GeocodingApiRequest request = new GeocodingApiRequest(geoApiContext);
         request.latlng(latLong);
         request.language(languageCode);
 
         GeocodingResult[] results = await(request);
+        GeocodingResult backupCountry = null;
 
         for(GeocodingResult result : results) {
             if(isCity(result.types)) {
                 return result;
             }
+            if(backupCountry == null && isCountry(result.types)) {
+                backupCountry = result;
+            }
         }
-        return null;
+        return backupCountry;
     }
 
-    private static boolean isCity(AddressType[]  addressTypes) {
+    /**
+     * @return  True if one of the given types is a city
+     * @see "https://developers.google.com/places/supported_types"
+     */
+    public static boolean isCity(AddressType[]  addressTypes) {
         for(AddressType addressType : addressTypes) {
-            //Google defines a city as a LOCALITY or an ADMINISTRATIVE AREA LEVEL 3 - see right at the bottom here https://developers.google.com/places/supported_types
+            //Google defines a city as a LOCALITY or an ADMINISTRATIVE AREA LEVEL 3
             if(addressType == AddressType.LOCALITY || addressType == AddressType.ADMINISTRATIVE_AREA_LEVEL_3) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * @return  True if one of the given types is a country
+     * @see "https://developers.google.com/places/supported_types"
+     */
+    public static boolean isCountry(AddressType[] addressTypes) {
+        return Arrays.asList(addressTypes).contains(AddressType.COUNTRY);
     }
 
     private <T> T await(PendingResult<T> pendingResult) throws GoogleConnectionException {

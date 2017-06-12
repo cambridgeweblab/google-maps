@@ -17,7 +17,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SING
  */
 @Configuration
 @ComponentScan(basePackages = "ucles.weblab.common.googlemaps")
-@PropertySource("classpath:/application.properties")
+@PropertySource("classpath:/googlemaps.properties")
 public class ProvideApiContextConfig {
     /**
      * The google locations API context.
