@@ -7,13 +7,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
-import ucles.weblab.common.googlemaps.bluemix.OkHttp3RequestHandler;
+import ucles.weblab.common.googlemaps.ibmjava.OkHttp3RequestHandler;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SINGLETON;
 
 /**
- * Provides the GeoApiContext which holds the CA api key, and with a bluemix compatible request handler (apparently
- * OkHttp is not compatible, and OkHttp3 needs to be used).
+ * Provides the GeoApiContext which holds the CA api key, and with a bluemix ibm java compatible request handler
+ * (apparently OkHttp is not compatible, and OkHttp3 needs to be used).
  */
 @Configuration
 @ComponentScan(basePackages = "ucles.weblab.common.googlemaps")

@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import ucles.weblab.common.googlemaps.config.ProvideApiContextConfig;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @Import({ProvideApiContextConfig.class})
@@ -23,7 +22,7 @@ public class GooglePlaceDetailsTest {
     @Test
     public void testFetchByPlaceId() throws GoogleConnectionException {
         PlaceDetails placeDetails = googlePlaceDetails.fetchByPlaceId(PARIS_GOOGLE_ID, "es");
-        assertEquals("París, Francia", placeDetails.formattedAddress);
-        assertNull(googlePlaceDetails.fetchByPlaceId("Invalid google ID", "es"));
+        assertThat(placeDetails.formattedAddress).isEqualTo("París, Francia");
+        assertThat(googlePlaceDetails.fetchByPlaceId("Invalid google ID", "es")).isNull();
     }
 }

@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import ucles.weblab.common.googlemaps.config.ProvideApiContextConfig;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @Import({ProvideApiContextConfig.class})
@@ -28,8 +26,8 @@ public class GoogleCitiesTest {
         String searchStr = "par";
         String parisEn = "Paris, France";
         String parisEs = "París, Francia";
-        assertTrue(googleCities.searchForCities(searchStr, ENGLISH).stream().anyMatch(prediction -> prediction.description.equals(parisEn)));
-        assertTrue(googleCities.searchForCities(searchStr, SPANISH).stream().anyMatch(prediction -> prediction.description.equals(parisEs)));
+        assertThat(googleCities.searchForCities(searchStr, ENGLISH).stream().anyMatch(prediction -> prediction.description.equals(parisEn))).isTrue();
+        assertThat(googleCities.searchForCities(searchStr, SPANISH).stream().anyMatch(prediction -> prediction.description.equals(parisEs))).isTrue();
     }
 
     @Test
@@ -37,15 +35,15 @@ public class GoogleCitiesTest {
 
         LatLng oneHillsRoad = new LatLng(52.19913570000001, 0.12795240000000002);
         GeocodingResult cambridgeCityInSpanish = googleCities.findCityOrCountryByLatLong(oneHillsRoad, SPANISH);
-        assertEquals("Cambridge, Reino Unido", cambridgeCityInSpanish.formattedAddress);
+        assertThat(cambridgeCityInSpanish.formattedAddress).isEqualTo("Cambridge, Reino Unido");
 
         LatLng northSea = new LatLng(56.458425, 3.555048);
         GeocodingResult noCitiesInTheNorthSea = googleCities.findCityOrCountryByLatLong(northSea, SPANISH);
-        assertNull(noCitiesInTheNorthSea);
+        assertThat(noCitiesInTheNorthSea).isNull();
 
         LatLng antarctica = new LatLng(-83.766245, -46.484898);
         GeocodingResult countryNotACity = googleCities.findCityOrCountryByLatLong(antarctica, SPANISH);
-        assertEquals("Antártida", countryNotACity.formattedAddress);
+        assertThat(countryNotACity.formattedAddress).isEqualTo("Antártida");
 
     }
 }
