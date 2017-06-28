@@ -96,6 +96,14 @@ public class GoogleCities {
         return Arrays.asList(addressTypes).contains(AddressType.COUNTRY);
     }
 
+    /**
+     * Sometimes the google API will include a left right mark in the city strings returned - this removes any such
+     * characters to aid string comparison.
+     */
+    public static String removeBidi(String city) {
+        return city.replaceAll("[\\u200E\\u200F]", "");
+    }
+
     private <T> T await(PendingResult<T> pendingResult) throws GoogleConnectionException {
         try {
             return pendingResult.await();

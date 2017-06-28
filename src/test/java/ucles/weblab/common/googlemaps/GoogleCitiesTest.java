@@ -46,4 +46,12 @@ public class GoogleCitiesTest {
         assertThat(countryNotACity.formattedAddress).isEqualTo("Antártida");
 
     }
+
+    //Related to WEM-1843
+    @Test
+    public void testRemoveBidi() {
+        String avilaWithIllegal = "ávila\u200E";
+        String avilaWithoutIllegal = "ávila";
+        assertThat(GoogleCities.removeBidi(avilaWithIllegal)).isEqualTo(avilaWithoutIllegal);
+    }
 }
