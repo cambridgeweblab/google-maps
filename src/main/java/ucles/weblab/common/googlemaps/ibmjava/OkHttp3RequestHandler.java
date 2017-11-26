@@ -83,17 +83,17 @@ public class OkHttp3RequestHandler implements GeoApiContext.RequestHandler {
 
     @Override
     public void setConnectTimeout(long timeout, TimeUnit unit) {
-        throw new UnsupportedOperationException("OkHttp3 uses a builder and doesn't support updates to its values");
+        throw new UnsupportedOperationException("OkHttp3 uses a builder and doesn't support updates to its values"); // NOPMD
     }
 
     @Override
     public void setReadTimeout(long timeout, TimeUnit unit) {
-        throw new UnsupportedOperationException("OkHttp3 uses a builder and doesn't support updates to its values");
+        throw new UnsupportedOperationException("OkHttp3 uses a builder and doesn't support updates to its values"); // NOPMD
     }
 
     @Override
     public void setWriteTimeout(long timeout, TimeUnit unit) {
-        throw new UnsupportedOperationException("OkHttp3 uses a builder and doesn't support updates to its values");
+        throw new UnsupportedOperationException("OkHttp3 uses a builder and doesn't support updates to its values"); // NOPMD
     }
 
     @Override

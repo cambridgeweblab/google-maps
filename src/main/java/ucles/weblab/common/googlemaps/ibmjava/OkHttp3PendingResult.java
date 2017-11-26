@@ -71,6 +71,7 @@ import java.util.concurrent.BlockingQueue;
  * Delete this when the main google maps api supports OkHttp3
  * @see com.google.maps.internal.OkHttpPendingResult
  */
+@SuppressWarnings("PMD")
 public class OkHttp3PendingResult<T, R extends ApiResponse<T>> implements PendingResult<T>, Callback {
     private final Request request;
     private final OkHttpClient client;

@@ -78,7 +78,7 @@ public class GoogleCities {
      * @return  True if one of the given types is a city
      * @see "https://developers.google.com/places/supported_types"
      */
-    public static boolean isCity(AddressType[]  addressTypes) {
+    public static boolean isCity(AddressType... addressTypes) {
         for(AddressType addressType : addressTypes) {
             //Google defines a city as a LOCALITY or an ADMINISTRATIVE AREA LEVEL 3
             if(addressType == AddressType.LOCALITY || addressType == AddressType.ADMINISTRATIVE_AREA_LEVEL_3) {
@@ -92,7 +92,7 @@ public class GoogleCities {
      * @return  True if one of the given types is a country
      * @see "https://developers.google.com/places/supported_types"
      */
-    public static boolean isCountry(AddressType[] addressTypes) {
+    public static boolean isCountry(AddressType... addressTypes) {
         return Arrays.asList(addressTypes).contains(AddressType.COUNTRY);
     }
 
