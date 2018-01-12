@@ -13,7 +13,7 @@ Just add to your pom file:
 <dependency>
     <groupId>ucles.weblab</groupId>
     <artifactId>weblab-google-maps</artifactId>
-    <version>${common-java.version}</version>
+    <version>0.5-SNAPSHOT</version>
 </dependency>
 ```
 and import the config file in your spring config file:
@@ -24,3 +24,5 @@ public class Foo {}
 ```
 this will provide the geoApiContext bean (required for every requeset) and some 
 querying classes.
+
+You will also need to provide the Spring application property `google.api.key` e.g. through an environment variable `GOOGLE_API_KEY`.

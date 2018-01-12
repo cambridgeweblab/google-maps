@@ -1,0 +1,26 @@
+language: java
+jdk:
+  - oraclejdk8
+env:
+  global:
+    # AWS_ACCESS_KEY and AWS_SECRET_ACCESS_KEY and GOOGLE_API_KEY
+    - secure: IW0gh4U7Gl43StIhK8ovPcyYZhwQXzXTQPGo0JMVHDPIbL0bS0fhKBzrR0x2eTPJtm0c57AeNyQ1/p5f+uXK+Y8OB8D+3dIlYJ+zxaIoUPj0XOBoOtJ6tkmxYMx97rKx7o3w9bM3FHj88tXzElaVua5s+USF34WAMLhZlz7BAlRfe6bvZB3SPVwK8E3Raz78mQSaSr5NwafHGMz9Wh6UGKhyPYMBlIl1t9bl+O2cOTDDsxp/VlhZ4EUjxSnlCmi4eSeMlwYHv/2bc3oMhAIwd238tjGkkPmZMDGG1u9QMZ3+cnJrxvvc1hG0JMezhgQlCxriI8Gs5IzXT+M+ZEDfmA==
+
+build:
+  ci:
+    - mkdir -p shippable/testresults
+    - mvn --batch-mode clean
+    - mvn --batch-mode -Pshippable deploy
+
+integrations:
+  notifications:
+    - integrationName: hipchat
+      type: hipchat
+      recipients:
+        - '#Everyone'
+        - '#Java%20Lava'
+      branches:
+        only:
+          - master
+      on_success: always
+      on_failure: always
