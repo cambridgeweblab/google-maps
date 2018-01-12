@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @Import({ProvideApiContextConfig.class})
-public class GooglePlaceDetailsTest {
+public class GooglePlaceDetails_IT {
 
     private final static String PARIS_GOOGLE_ID = "ChIJD7fiBh9u5kcRYJSMaMOCCwQ";
 

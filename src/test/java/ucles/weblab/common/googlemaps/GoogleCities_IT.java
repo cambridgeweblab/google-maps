@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @Import({ProvideApiContextConfig.class})
-public class GoogleCitiesTest {
+public class GoogleCities_IT {
 
     @Autowired
     private GoogleCities googleCities;
